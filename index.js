@@ -3125,7 +3125,7 @@ class RechkoStats extends RechkoPopup {
             this.board[5].every(e=>0 !== e.state) && (this.finish = !0),
             this.message = this.win ? ["Генијално!", "Величанствено!", "Импресивно!", "Одлично!", "Браво!", "Није лоше!"][i] : this.finish ? this.answer : "",
             this.boardGrid = this.board.slice(0, i + 1).map(e=>e.map(e=>ICONS[e.state]).join("")).join("\n"),
-            this.shareText = `rechko.com
+            this.shareText = `ugrinovs.github.io/recko
         ${o}/${t}/${s}
         ` + this.boardGrid
     }
