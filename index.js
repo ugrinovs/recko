@@ -2995,18 +2995,20 @@ class RechkoStats extends RechkoPopup {
 
 
 
-        :host .distribution > .dan > div > div {
+        :host .distribution > .dan > div > .red {
                 display: flex;
                 margin: 1px 0;
             }
-            :host .distribution > .dan > div > div > * {
+            :host .distribution > .dan > div > .red > * {
                 padding: 0.25em 0.5em;
             }
-            :host .distribution > .dan > div > div > :nth-child(1) {
+            :host .distribution > .dan > div > .red > :nth-child(1) {
                 width: 50%;
+                text-align: left;
             }
-            :host .distribution > .dan > div > div > :nth-child(2) {
-                flex: 1;
+            :host .distribution > .dan > div > .red > :nth-child(2) {
+                flex: 1 !important;
+                flex-grow: 1 !important;
                 background: #6aaa64 !important;
                 margin-left: 0.5em;
                 text-align: right;
@@ -3047,6 +3049,46 @@ class RechkoStats extends RechkoPopup {
             }
             .dan.hide > .rezultat{
                 display: none;
+            }
+
+            rechko-stats .distribution > .dan > div > .parent-grid-history {
+                display: block;
+                    text-align: center;
+                  //  width: 25%;
+                    margin: 1rem auto;
+            }
+            rechko-stats .distribution > .dan > div > .parent-grid-history > .grid-history {
+                display: block;
+                //width: 25%;
+                margin: 1rem;
+                background: none !important;
+            }
+
+
+            .rezultat > . {
+                height: 5rem;
+                margin: 1rem 0;
+            }
+            .correct {
+                display: inline-block;
+                margin: 0 0.1rem;
+                padding: 0.5rem;
+                width: 34px;
+                background: #6aaa64;
+            }
+            .present {
+                display: inline-block;
+                margin: 0 0.1rem;
+                padding: 0.5rem;
+                width: 34px;
+                background: #c9b458;
+            }
+            .absent {
+                display: inline-block;
+                margin: 0 0.1rem;
+                padding: 0.5rem;
+                width: 34px;
+                background: #999999;
             }
         `
     }
@@ -3153,6 +3195,9 @@ class RechkoStats extends RechkoPopup {
             
             const rec = igra[igraIndex].map(i => i.letter).join('');
 
+            const boardZaDatum = history$1.load(kljuc);
+            console.log('bzd', boardZaDatum);
+            const boardGridZaDatum = boardZaDatum.map(row => ["div", { class: "grid-history" }, [row.map(e=>["span", { class: e.state }, String(e.letter)])]]);
             const datum = this.pronadjiDatum(kljuc);
             console.log('datum',datum);
             const reprezentacijaDatuma = `${datum.getDate()}/${datum.getMonth() + 1}/${datum.getFullYear()}`;
@@ -3162,7 +3207,7 @@ class RechkoStats extends RechkoPopup {
                     ["span", {
                         'on-click': this.toggleDatum,
                     }, String(reprezentacijaDatuma)],
-                    ["div", { class: "rezultat" }, [["div",
+                    ["div", { class: "rezultat" }, [["div", { class: "red" },
                         [
                             ["span", "Rec"],
                             ["span", {
@@ -3173,7 +3218,7 @@ class RechkoStats extends RechkoPopup {
                             ]
                         ]
                     ],
-                    ["div",
+                        ["div", { class: "red" },
                         [
                             ["span", "Broj pokušaja"],
                             ["span", {
@@ -3181,9 +3226,12 @@ class RechkoStats extends RechkoPopup {
                                     flex: this.gameStats[0] / e
                                 }
                             }, String(igraIndex + 1)
-                            ]
+                            ],
                         ]
-                    ]],
+                    ],
+
+                        ["div",{ class: "parent-grid-history"}, boardGridZaDatum],
+                    ],
                 ]
                 ]]
             ];
@@ -3192,6 +3240,8 @@ class RechkoStats extends RechkoPopup {
             statistike = [...statistike, statistikaZaDatum]
         }
         console.log('st', statistike);
+        console.log('h', history$1);
+        console.log('ah', allHistory)
 let statistika= [
     ["div", { class: 'istorija' }, [
                 ["div",
