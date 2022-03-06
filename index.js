@@ -3069,25 +3069,19 @@ class RechkoStats extends RechkoPopup {
                 height: 5rem;
                 margin: 1rem 0;
             }
-            .correct {
+            .correct, .present, .absent {
                 display: inline-block;
                 margin: 0 0.1rem;
                 padding: 0.5rem;
-                width: 34px;
+                width: calc(100% / 10);
+            }
+            .correct {
                 background: #6aaa64;
             }
             .present {
-                display: inline-block;
-                margin: 0 0.1rem;
-                padding: 0.5rem;
-                width: 34px;
                 background: #c9b458;
             }
             .absent {
-                display: inline-block;
-                margin: 0 0.1rem;
-                padding: 0.5rem;
-                width: 34px;
                 background: #999999;
             }
         `
