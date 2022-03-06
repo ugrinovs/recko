@@ -2974,17 +2974,47 @@ class RechkoStats extends RechkoPopup {
             :host .grid .count {
                 font-size: 2rem;
             }
-            :host .distribution > div > div > div {
+
+
+        :host .distribution > .istorija > div {
                 display: flex;
                 margin: 1px 0;
             }
-            :host .distribution > div > div > div > * {
+            :host .distribution > .istorija > div > * {
                 padding: 0.25em 0.5em;
             }
-            :host .distribution > div > div > div > :nth-child(1) {
+            :host .distribution > .istorija > div > :nth-child(1) {
+                width: 1.25em;
+            }
+            :host .distribution> .istorija > div > :nth-child(2) {
+                flex: 1;
+                background: #6aaa64 !important;
+                margin-left: 0.5em;
+                text-align: right;
+            }
+
+
+
+        :host .distribution > .dan > div > div {
+                display: flex;
+                margin: 1px 0;
+            }
+            :host .distribution > .dan > div > div > * {
+                padding: 0.25em 0.5em;
+            }
+            :host .distribution > .dan > div > div > :nth-child(1) {
                 width: 50%;
             }
-            :host .distribution > div > div > div > :nth-child(2) {
+            :host .distribution > .dan > div > div > :nth-child(2) {
+                flex: 1;
+                background: #6aaa64 !important;
+                margin-left: 0.5em;
+                text-align: right;
+            }
+
+
+
+            :host .distribution > .istorija > div > :nth-child(2) {
                 flex: 1;
                 background: #6aaa64 !important;
                 margin-left: 0.5em;
@@ -3163,7 +3193,7 @@ class RechkoStats extends RechkoPopup {
         }
         console.log('st', statistike);
 let statistika= [
-                ["div", [
+    ["div", { class: 'istorija' }, [
                 ["div",
                     [
                         ["span", "1"],
@@ -3260,7 +3290,7 @@ let statistika= [
             class: "count"
         }, String(this.gamesWon)], ["span", "започетих"], ["span", "одиграних"], ["span", "решених"]]], ["h4", "Дистрибуција погодака:"], ["div", {
             class: "distribution"
-        }, statistike,
+        }, [statistika, ...statistike],
         ],
             ["io-icon", {
                 icon: "icons:close",
