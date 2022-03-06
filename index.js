@@ -3044,6 +3044,9 @@ class RechkoStats extends RechkoPopup {
                 margin-left: 0.5em;
                 margin-bottom: -0.5em;
             }
+            .dan {
+                cursor: pointer;
+            }
             .dan > .rezultat {
                 display: block;
             }
@@ -3170,8 +3173,7 @@ class RechkoStats extends RechkoPopup {
         return new Date(datum);
     }
     toggleDatum(e) {
-        console.log('dt', e);
-        e.target.parentElement.classList.toggle('hide');
+        e.currentTarget.classList.toggle('hide');
     }
     changed() {
         var e = this.gameStats.reduce(function(e, t) {
@@ -3197,9 +3199,16 @@ class RechkoStats extends RechkoPopup {
             const reprezentacijaDatuma = `${datum.getDate()}/${datum.getMonth() + 1}/${datum.getFullYear()}`;
             console.log('repDatum', String(reprezentacijaDatuma));
             const statistikaZaDatum = [
-                ["div",{ class: "dan hide"}, [
+                ["div",{ class: "dan hide", 'on-click': this.toggleDatum}, [
                     ["span", {
-                        'on-click': this.toggleDatum,
+                        style: {
+                            
+                            'font-size': '24px',
+                            margin: '10px',
+                            display: 'inline-block'
+
+                        }
+
                     }, String(reprezentacijaDatuma)],
                     ["div", { class: "rezultat" }, [["div", { class: "red" },
                         [
