@@ -2976,7 +2976,7 @@ class RechkoStats extends RechkoPopup {
             }
 
 
-        :host .distribution > .istorija > div {
+            :host .distribution > .istorija > div {
                 display: flex;
                 margin: 1px 0;
             }
@@ -2993,12 +2993,11 @@ class RechkoStats extends RechkoPopup {
                 text-align: right;
             }
 
-
-
-        :host .distribution > .dan > div > .red {
+            :host .distribution > .dan > div > .red {
                 display: flex;
                 margin: 1px 0;
             }
+
             :host .distribution > .dan > div > .red > * {
                 padding: 0.25em 0.5em;
             }
@@ -3014,14 +3013,16 @@ class RechkoStats extends RechkoPopup {
                 text-align: right;
             }
 
-
-
             :host .distribution > .istorija > div > :nth-child(2) {
                 flex: 1;
                 background: #6aaa64 !important;
                 margin-left: 0.5em;
                 text-align: right;
             }
+            :host .distribution > .istorija > div:last-of-type > :nth-child(2) {
+                background: #ee5a34 !important
+            }
+
             :host > button {
                 margin: 1em auto;
                 width: 8em;
@@ -3044,21 +3045,35 @@ class RechkoStats extends RechkoPopup {
                 margin-left: 0.5em;
                 margin-bottom: -0.5em;
             }
+            .istorija {
+                margin-bottom: 1rem;
+            }
+
             .dan {
                 cursor: pointer;
+                border: 1px solid #b2b2b2;
+            }
+            .dan.hide:not(:last-child) {
+                border-bottom: none;
             }
             .dan > .rezultat {
                 display: block;
+                max-height: 500px;
+                visibility: visible; 
+                opacity:1;
+                transition: all .1s ease-in;
             }
             .dan.hide > .rezultat{
-                display: none;
+                max-height: 0;
+                opacity: 0;
+                visibility: hidden;
+                transition: all .1s ease-in;
             }
 
             rechko-stats .distribution > .dan > div > .parent-grid-history {
                 display: block;
-                    text-align: center;
-                  //  width: 25%;
-                    margin: 1rem auto;
+                text-align: center;
+                margin: 1rem auto;
             }
             rechko-stats .distribution > .dan > div > .parent-grid-history > .grid-history {
                 display: block;
@@ -3185,7 +3200,9 @@ class RechkoStats extends RechkoPopup {
         let statistike = []; 
         for (let i = 0; i < Object.keys(istorijaIgre).length; i++) {
 
-            const kljuc = Object.keys(istorijaIgre)[i];
+            const istorijaIgreKljucevi = Object.keys(istorijaIgre).sort((a, b) => b-a);
+
+            const kljuc = istorijaIgreKljucevi[i];
             const igra = istorijaIgre[kljuc];
             const igraIndex = igra.findIndex(korak => korak.every(k => k.state === 'correct'));
             
